@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-To se
+To see the app in action, go to 
 
 ## Features
 
