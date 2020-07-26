@@ -1,5 +1,5 @@
 # MyYelpCamp
->MyYelpCamp is a website where users can create and review campgrounds. In order to review or create a campground, you must have an LogIn/SignIn. 
+>MyYelpCamp is a website where users can create and review campgrounds. In order to review or create a campground, you must LogIn/SignIn. 
 
 This project was created using Node.js, Express, MongoDB, and Bootstrap. Passport.js was used to handle authentication.
 
