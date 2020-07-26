@@ -1,0 +1,103 @@
+<!-- HEADER -->
+<%- include('../partials/header'); -%>
+
+
+
+<% var today = new Date();%>
+<%var dd = String(today.getDate()).padStart(2, '0');%>
+<%var mm = String(today.getMonth() + 1).padStart(2, '0');%> 
+<%var yyyy = today.getFullYear();%>
+
+<% today = dd + '/' + mm + '/' + yyyy; %>
+
+ 
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+				<ul>
+					<li class="list-group-item list-group-item-info">Location: <strong><%=obj.location %></strong></li>
+					<li class="list-group-item list-group-item-light">Prize: <strong><%=obj.prize %>/night</strong></li>
+					<li class="list-group-item list-group-item-dark">Reviewed By: <strong><%=obj.comments.length %></strong></li>
+				</ul>   
+            </div>
+        </div>
+        <div  class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= obj.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-right"><strong>Rs.<%= obj.prize%>/night</strong></h4>
+                    <h4><a><%=obj.name%></a></h4>
+                    <p><%=obj.discription %></p>
+					
+				
+					<p>
+						<em>Submitted By~ <strong><%=obj.author.username %></strong></em>
+					</p>
+	
+					<% if(currentUser && obj.author.id.equals(currentUser._id)){%>
+						<a class="btn btn-warning" href="/campgrounds/<%=obj._id%>/edit">Edit</a>
+						<form id="delete-form" action="/campgrounds/<%= obj._id %>?_method=DELETE" method="POST">
+                            <button class="pull-right btn btn-danger">Delete</button>
+                        </form>
+                	<%}%>
+				</div>
+            </div>
+            <div class="well">
+				<% if (obj.comments.length === 0) { %>
+                    <h5>
+                        <em>No reviews yet.</em>
+                    </h5>
+				<%}%>
+				<div class="row">
+					<div class="col-md-5">
+						<strong>Total Comments  <span class="badge badge-primary badge-pill"><%=obj.comments.length %></span></strong>
+						<% if (obj.comments.length != 0) { %>
+                    			<p><h4>Top Commments :</h4></p>
+						<%}%>
+						
+					</div>
+					
+					<div class="col-md-7">
+						<div class="text-right">
+                   			 <a class="btn btn-success" href="/campgrounds/<%= obj._id %>/comments/new">Add New Comment</a>
+                		</div>
+					</div>
+				</div>
+                
+               <hr style="margin-top: 0;">
+                <% obj.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-3">
+							<div><em>Reviewed By:</em></div>
+                            <strong><%= comment.author.username %></strong>
+							<%var b=comment.rating %>
+						
+							<span ><%- '<span id="df" class="fa fa-star checked"></span>'.repeat(b) %></span>
+												
+						</div>	
+						<div class="col-md-8 col-sm-9">
+							<p class="pull-right">
+                            <%= comment.text %> 
+                            </p>
+							
+							<% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+								
+								<a class="btn btn-xs btn-warning" href="/campgrounds/<%=obj._id%>/comments/<%=comment._id%>/edit">Edit</a>
+								<form id="delete-form" action="/campgrounds/<%= obj._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                            		<button class="btn btn-xs btn-danger">Delete</button>
+                        		</form>
+								<%}%>
+							
+                        </div>
+                    </div>
+				<hr>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Footer -->
+<%- include('../partials/footer'); -%>	
