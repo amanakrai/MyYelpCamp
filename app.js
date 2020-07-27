@@ -19,23 +19,12 @@ var indexRoutes		 =require("./routes/index");
 //========================
 //Connection to MongoDB
 //========================
-var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp";
-// mongoose.connect(url)
-//console.log(process.env.DATABASEURL);
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp";			//DATABASEURL is for both MongoDB local url and MongoDBAtlas url
+
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-
-// mongoose.connect('mongodb+srv://amanakrai:aman123rai@cluster0.ll2jn.mongodb.net/MyYelpCamp?retryWrites=true&w=majority', {
-// 	useNewUrlParser: true,
-// 	useCreateIndex: true
-// }).then(() => {
-// 	console.log('Connected to DB!');
-// }).catch(err => {
-// 	console.log('ERROR:', err.message);
-// });
-
 
 
 app.use(bodyparser.urlencoded({extended: true}));
@@ -78,7 +67,4 @@ app.use(commentRoutes);
 
 
 
-// app.listen(5000, function() { 
-//   console.log('Server listening on port 5000'); 
-// });
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.LOCALPORT || 5000)			//LOCALPORT for localhost and 5000 for Heroku
