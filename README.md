@@ -6,7 +6,7 @@ This project was created using Node.js, Express, MongoDB, and Bootstrap. Passpor
 
 ## Live Demo
 
-To see the app in action, go to 
+To see the app in action, go to  [MyYelpCamp](https://infinite-reaches-08131.herokuapp.com/)
 
 ## Features
 
