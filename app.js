@@ -67,4 +67,4 @@ app.use(commentRoutes);
 
 
 
-app.listen(process.env.LOCALPORT || 5000)			//LOCALPORT for localhost and 5000 for Heroku
+app.listen(process.env.PORT || 5000)			//LOCALPORT for localhost and 5000 for Heroku
